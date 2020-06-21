@@ -1,0 +1,43 @@
+set noerrorbells
+"tab to 4 spaces"
+set tabstop=4 softtabstop=4
+"add numbering"
+set nu
+syntax enable
+colorscheme slate
+set background=dark
+set shiftwidth=4
+"insert spaces of tabs"
+set expandtab
+set smartindent
+set nowrap
+set smartcase
+"incremental searching with /"
+set incsearch
+"allows normal use of backspace"
+set backspace=indent,eol,start
+" Toggle relative line number with ctrl twice"
+"nmap <C-L><C-L> :set invrelativenumber<CR>
+"this is for the br on the righ"
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 
+"this is for emmet expand command"
+let g:user_emmet_leader_key=','
+"leader key precedes other keys in commands"
+let mapleader = " "
+"for swotching between windows in split screen, leader k up, leader j down etc"
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+"relative line number really useful"
+noremap  <leader>n :set invrelativenumber<CR>
+
+"remap splitting windows horiz and vert"
+nnoremap <leader>f <C-w>v
+nnoremap <leader>d <C-w>s
+"opens up filetree on the left and resizes it down"
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+"for resizing the window in small increments easily"
+nnoremap <silent> <Leader>+ :vertical resize +5<CR>
+nnoremap <silent> <Leader>- :vertical resize -5<CR>
