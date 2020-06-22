@@ -1,38 +1,47 @@
 call plug#begin('~/local/share/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'jremmen/vim-ripgrep'
 Plug 'mbbill/undotree'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()	
+
+let g:airline_theme='gruvbox'
+let g:netrw_browse_split = 2
+let g:vrfr_rg = 'true'
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+
 set noerrorbells
 set tabstop=4 softtabstop=4
 set nu
 syntax enable
 colorscheme gruvbox
 set background=dark
+"default to relative line number"
+set relativenumber
 set shiftwidth=4
 set expandtab
 set smartindent
 set nowrap
+set splitright
 set smartcase
 set incsearch
 set backspace=indent,eol,start
-" Toggle relative line number
-nmap <C-L><C-L> :set invrelativenumber<CR>
 "this is for the br on the righ"
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 
 "this is for emmet expand command"
 let g:user_emmet_leader_key=','
-"these do the closing brackets"
-"inoremap ' ''<left>
-"inoremap ( ()<left>
-"inoremap [ []<left>
-"inoremap { {}<left>
-"inoremap {<CR> {<CR>}<ESC>O
-"inoremap {;<CR> {<CR>};<ESC>O
+"this copies my .vimrc to myVimrc file, later I want to make this"
+" also update to github using git fugitive"
+command UpMyVim :!cat < ~/.vimrc > ~/Desktop/summer_code/vim/myVimrc 
 "the following are some shortcut commands for ycp and other things"
 let mapleader = " "
 "for swotching between windows in split screen, leader k up, leader j down etc"
@@ -41,17 +50,38 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-
+"Toggle relative line number"
+nnoremap <leader>q :set invrelativenumber<CR>
+"run the python program that you are in before I also had :update but
+" it broke the code sometimes"
+nmap <leader>r :w<CR>: !python %<CR>
 "remap splitting windows horiz and vert"
-nnoremap <leader>f <C-w>v
-nnoremap <leader>d <C-w>s
+nnoremap <leader>a <C-w>v <CR> :wincmd l<CR>
+nnoremap <leader>d <C-w>s <CR> 
+
+"create new file"
+nnoremap <leader>n :vnew <CR>
+
+nnoremap <leader>s :saveas 
+
+nnoremap <leader>; :update<CR>:source % <CR>
 "nnoremap <leader>v :sp<CR>
 "opens up filetree on the left and resizes it down"
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
+"fzf commands"
+"git files
+nnoremap <leader>g :GFiles<CR>
+"all files
+nnoremap <Leader>f :Files<CR>
 "for resizing the window in small increments easily"
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
+"nnoremap <silent> <Leader>+ :vertical resize +5<CR>
+"nnoremap <silent> <Leader>- :vertical resize -5<CR>
+nnoremap = :vertical resize +5<CR>
+nnoremap - :vertical resize -5<CR>
+nnoremap <Leader>= :resize +5<CR>
+nnoremap <Leader>- :resize -5<CR>
+
 noremap J :m '>+1<CR>gv=gv
 noremap K :m '<-2<CR>gv=gv
 "figure out this function doesnt seem like gr and rr are working"
